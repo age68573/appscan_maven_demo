@@ -19,7 +19,7 @@
       <artifactId>Log4AltoroJ</artifactId>
       <version>1.0</version>
       <scope>system</scope>
-      <systemPath>${basedir}/Log4AltoroJ.jar</systemPath>
+      <systemPath>${project.basedir}/Log4AltoroJ.jar</systemPath>
   	</dependency>
   	<dependency>
       <groupId>commons-lang</groupId>
