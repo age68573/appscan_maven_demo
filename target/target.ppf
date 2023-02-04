@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project fallback_default_config_name="Configuration 1" ltd_name="java" name="target" version="10.0.7" web_context_root_path=".\AltoroJ_mvn">
+	<Configuration jdk_name="AdoptOpenJDK 11 64 bit" name="Configuration 1"/>
+	<Source exclude="false" path=".\AltoroJ_mvn" web="true"/>
+	<ProjectScanSettings/>
+</Project>
