@@ -39,42 +39,76 @@
     <finalName>AltoroJ_mvn</finalName>
     <plugins>
     	<plugin>
-   			<artifactId>maven-compiler-plugin</artifactId>
-   			<configuration>
-     			<source>1.7</source>
-			     <target>1.7</target>
-   			</configuration>
- 		</plugin> 
+    	     <artifactId>maven-compiler-plugin</artifactId>
+   	     <configuration>
+     		 <source>1.7</source>
+ 		 <target>1.7</target>
+   	     </configuration>
+ 	</plugin> 
         <plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>3.3.1</version>
-			</plugin>
+	    <groupId>org.apache.maven.plugins</groupId>
+	    <artifactId>maven-war-plugin</artifactId>
+	    <version>3.3.1</version>
+	</plugin>
 	<plugin>
-		<groupId>org.codehaus.mojo</groupId>
-		<artifactId>ounce-maven-plugin</artifactId>
-		<configuration>
-			<installDir>C:\Program Files (x86)\IBM\AppScanSource</installDir>
-			<applicationFile>${basedir}/${artifactId}.paf</applicationFile>
-			<includeTestSources>false</includeTestSources>
-			<assessmentOutput>${basedir}/${artifactId}-assessment.ozasmt</assessmentOutput>
-			<waitForScan>true</waitForScan> 
-			<reportType>Findings</reportType>
-			<reportOutputType>html</reportOutputType>
-			<reportOutputPath>${basedir}/report.html</reportOutputPath>
-			<includeSrcBefore>5</includeSrcBefore>
-			<includeSrcAfter>5</includeSrcAfter>			
-		</configuration>
-		<executions>
-			<execution>
-				<id>create ounce project</id>
-				<goals>
-					<goal>report</goal>
-				</goals>
-			</execution>
-		</executions>
-	</plugin>    
-
+	    <groupId>org.codehaus.mojo</groupId>
+	    <artifactId>ounce-maven-plugin</artifactId>
+	    <configuration>
+		<installDir>C:\Program Files (x86)\IBM\AppScanSource</installDir>
+		<applicationFile>${basedir}/${artifactId}.paf</applicationFile>
+		<includeTestSources>false</includeTestSources>
+		<assessmentOutput>${basedir}/${artifactId}-assessment.ozasmt</assessmentOutput>
+		<waitForScan>true</waitForScan> 
+		<reportType>Findings</reportType>
+		<reportOutputType>html</reportOutputType>
+		<reportOutputPath>${basedir}/report.html</reportOutputPath>
+		<includeSrcBefore>5</includeSrcBefore>
+		<includeSrcAfter>5</includeSrcAfter>			
+	    </configuration>
+	    <executions>
+		<execution>
+		    <id>create ounce project</id>
+		    <goals>
+			<goal>report</goal>
+		    </goals>
+		</execution>
+	    </executions>
+	</plugin>   
+	 <!-- Deploy on jbossEAP -->
+        <plugin>
+   	    <groupId>org.wildfly.plugins</groupId>
+            <artifactId>wildfly-maven-plugin</artifactId>
+            <version>2.1.0.Beta1</version>
+            <executions>
+		    
+	    	<!-- Undeploy the application on clean -->
+      		<execution>
+        	    <id>undeploy</id>
+         	    <phase>clean</phase>
+         	    <goals>
+            	        <goal>undeploy</goal>
+         	    </goals>
+         	    <configuration>
+            	        <ignoreMissingDeployment>true</ignoreMissingDeployment>
+         	    </configuration>
+      	    	</execution>
+		    
+     	    	<!-- Deploy the application on install -->
+	    	<execution>
+		   <id>deploy</id>
+		   <phase>install</phase>
+		   <goals>
+                       <goal>deploy</goal>
+           	   </goals>
+	   	</execution>
+   	    </executions>
+     	    <configuration>
+      		<hostname>10.107.72.11</hostname>
+      		<port>9990</port>
+      		<username>admin</username>
+      		<password>admin</password>
+  	    </configuration>
+	 </plugin>
     </plugins>
   </build>
 </project>
